@@ -1,45 +1,79 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof (MeshFilter))]
 public class MeshGenerator : MonoBehaviour {
 	// Start is called before the first frame update
 	Mesh mesh;
-	[SerializeField] private MeshFilter meshFilter;
 
-	[SerializeField] Vector3 [] vertices;
+	Vector3 [] vertices;
 	int [] triangles;
 
-	[SerializeField] private int xSize = 20;
-	[SerializeField] private int zSize = 20;
+	[SerializeField] private int xSize = 40;
+	[SerializeField] private int zSize = 40;
+
+	private int newNoise;
 
 	void Start () {
 		mesh = new Mesh ();
-		meshFilter.mesh = this.mesh;
-
-		CreateShape ();
-		//UpdateMesh ();
+		GetComponent<MeshFilter> ().mesh = this.mesh;
+		StartCoroutine ("CreateShape");
+		UpdateMesh ();
 	}
 
+	private void Update () {
+		UpdateMesh ();
+	}
 
 	// creates the shape of the mesh
-	private void CreateShape () {
+	IEnumerator CreateShape () {
+		this.newNoise = Random.Range (0, 10000);
 		vertices = new Vector3 [(xSize + 1) * (zSize + 1)];
-
 
 		for (int z = 0, i = 0; z <= zSize; z++) {
 			for (int x = 0; x <= xSize; x++) {
-				//vertices [(z * 4) + x] = new Vector3 (x, 0, z);
-				vertices [i] = new Vector3 (x, 0, z);
+				float y = Mathf.PerlinNoise (newNoise + (x * .1f), newNoise + (z * .1f)) * 3f;
+				vertices [i] = new Vector3 (x, y, z);
 				i++;
 			}
 		}
+
+		int vert = 0;
+		int tris = 0;
+		triangles = new int [(xSize * zSize) * 6];
+		for (int z = 0; z < zSize; z++) {
+			for (int x = 0; x < xSize; x++) {
+
+				triangles [tris + 0] = vert + 0;
+				triangles [tris + 1] = vert + xSize + 1;
+				triangles [tris + 2] = vert + 1;
+
+				triangles [tris + 3] = vert + 1;
+				triangles [tris + 4] = vert + xSize + 1;
+				triangles [tris + 5] = vert + xSize + 2;
+				vert++;
+				tris += 6;
+
+			}
+			yield return new WaitForSeconds (.000001f);
+			vert++;
+		}
+
+		if (tris == triangles.Length) {
+			yield return new WaitForSeconds (1f);
+			StartCoroutine ("CreateShape");
+		}
+
 	}
 
 	// updates the mesh in unity
 	private void UpdateMesh () {
-		throw new NotImplementedException ();
+		mesh.Clear ();
+		mesh.vertices = vertices;
+		mesh.triangles = triangles;
+
+		mesh.RecalculateNormals (); // for lighting
 	}
 
 	private void OnDrawGizmos () {
