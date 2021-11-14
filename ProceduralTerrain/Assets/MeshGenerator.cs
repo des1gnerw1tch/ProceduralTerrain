@@ -12,6 +12,8 @@ public class MeshGenerator : MonoBehaviour {
 
 	[SerializeField] private int xSize = 40;
 	[SerializeField] private int zSize = 40;
+	[SerializeField] private float amplititude = 3f;
+	[SerializeField] private float scale = .1f;
 
 	private int newNoise;
 
@@ -33,7 +35,7 @@ public class MeshGenerator : MonoBehaviour {
 
 		for (int z = 0, i = 0; z <= zSize; z++) {
 			for (int x = 0; x <= xSize; x++) {
-				float y = Mathf.PerlinNoise (newNoise + (x * .1f), newNoise + (z * .1f)) * 12f;
+				float y = Mathf.PerlinNoise (newNoise + (x * scale), newNoise + (z * scale)) * amplititude;
 				vertices [i] = new Vector3 (x, y, z);
 				i++;
 			}
