@@ -11,14 +11,13 @@ public class StreetGrid : MonoBehaviour {
 	 * y value of 0-1 is height of building
 	 */
 	Vector3 [,] vertices;
-	int [] triangles;
 
 	[SerializeField] private int xSize = 40;
 	[SerializeField] private int zSize = 40;
 	[SerializeField] private int gridScale = 1;
 	[SerializeField] private int streetEveryWhatVertices = 3;
-	[SerializeField] private GameObject streetTile;
-	[SerializeField] private GameObject intersectionTile;
+
+	[SerializeField] PlaceObjectsFromGrid gridPlacer;
 
 	void Start () {
 		mesh = new Mesh ();
@@ -43,61 +42,8 @@ public class StreetGrid : MonoBehaviour {
 			}
 		}
 
-		StartCoroutine ("PlaceStreets");
-	}
+		gridPlacer.PlaceStreets (this.vertices, this.xSize, this.zSize); // uses this matrix to place objects
 
-	// places streets prefabs onto scene
-	IEnumerator PlaceStreets () {
-		// for every tile in the scene
-		for (int x = 0; x < xSize; x++) {
-			for (int z = 0; z < zSize; z++) {
-				// if is street tile
-				if (vertices [x, z].y == -1) {
-					Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
-					toDraw.y = 0.001f; // so street lays on top of grass
-
-					GameObject instance;
-					if (HasXNeighbor (x, z) && HasZNeighbor (x, z)) {
-						instance = Instantiate (intersectionTile, toDraw, Quaternion.identity); // spawn Intersection
-					} else {
-						instance = Instantiate (streetTile, toDraw, Quaternion.identity); // spawn normal street
-						if (HasXNeighbor (x, z)) {
-							instance.transform.Rotate (new Vector3 (0, 90, 0)); // if has a X neighbor, we should rotate to match
-						}
-					}
-					yield return new WaitForSeconds (.00001f);
-				}
-			}
-		}
-
-	}
-
-	// checks if a street has neighbor on the X axis
-	private bool HasXNeighbor (int x, int z) {
-		int upperCheckIndex = x + 1;
-		int lowerCheckIndex = x - 1;
-
-		if ((upperCheckIndex < xSize) && vertices [upperCheckIndex, z].y == -1) { // is a street
-			return true;
-		} else if ((lowerCheckIndex >= 0) && vertices [lowerCheckIndex, z].y == -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	// checks if a street has neighbor on the X axis
-	private bool HasZNeighbor (int x, int z) {
-		int upperCheckIndex = z + 1;
-		int lowerCheckIndex = z - 1;
-
-		if ((upperCheckIndex < zSize) && vertices [x, upperCheckIndex].y == -1) { // is a street
-			return true;
-		} else if ((lowerCheckIndex >= 0) && vertices [x, lowerCheckIndex].y == -1) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	private void OnDrawGizmos () {
