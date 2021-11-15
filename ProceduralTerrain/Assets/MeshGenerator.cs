@@ -14,10 +14,12 @@ public class MeshGenerator : MonoBehaviour {
 	[SerializeField] private int zSize = 40;
 	[SerializeField] private float amplititude = 3f;
 	[SerializeField] private float scale = .1f;
+	[SerializeField] private bool looping = true;
+	[SerializeField] private bool drawGizmos = true;
 
 	private int newNoise;
 
-	void Start () {
+	void Awake () {
 		mesh = new Mesh ();
 		GetComponent<MeshFilter> ().mesh = this.mesh;
 		StartCoroutine ("CreateShape");
@@ -62,7 +64,7 @@ public class MeshGenerator : MonoBehaviour {
 			vert++;
 		}
 
-		if (tris == triangles.Length) {
+		if (tris == triangles.Length && looping) {
 			yield return new WaitForSeconds (1f);
 			StartCoroutine ("CreateShape");
 		}
@@ -79,13 +81,19 @@ public class MeshGenerator : MonoBehaviour {
 	}
 
 	private void OnDrawGizmos () {
-		if (vertices == null) {
+		if (vertices == null || !drawGizmos) {
 			return;
 		}
 
 		for (int i = 0; i < vertices.Length; i++) {
 			Gizmos.DrawSphere (vertices [i], 0.1f);
 		}
+	}
+
+	// TODO: Broken lmao, will try to fix at some point but for now works okay 
+	// returns the height found at this index
+	public float heightFromIndex (int x, int z) {
+		return vertices [x + (z * (xSize + 1))].y;
 	}
 
 }

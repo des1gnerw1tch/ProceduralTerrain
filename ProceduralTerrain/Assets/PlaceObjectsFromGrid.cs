@@ -10,6 +10,8 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 	[SerializeField] private GameObject streetTile;
 	[SerializeField] private GameObject intersectionTile;
 
+	[SerializeField] private GameObject buildingTile;
+
 	public void PlaceStreets (Vector3 [,] vertices, int xSize, int zSize) {
 		this.vertices = vertices;
 		this.xSize = xSize;
@@ -39,7 +41,29 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 				}
 			}
 		}
+		StartCoroutine ("IPlaceBuildings");
+	}
 
+	IEnumerator IPlaceBuildings () {
+		for (int x = 0; x < xSize; x++) {
+			for (int z = 0; z < zSize; z++) {
+
+				// if is not street tile
+				if (vertices [x, z].y != -1) {
+
+					GameObject instance;
+					Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
+					toDraw.y = 0.001f; // so street lays on top of grass
+
+					instance = Instantiate (buildingTile, toDraw, Quaternion.identity); // spawn building
+
+					Vector3 newScale = instance.transform.localScale;
+					newScale.y += vertices [x, z].y; // adding on the added height of the building
+					instance.transform.localScale = newScale;
+					yield return new WaitForSeconds (.00001f);
+				}
+			}
+		}
 	}
 
 	// checks if a street has neighbor on the X axis

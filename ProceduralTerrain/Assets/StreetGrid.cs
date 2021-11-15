@@ -17,7 +17,8 @@ public class StreetGrid : MonoBehaviour {
 	[SerializeField] private int gridScale = 1;
 	[SerializeField] private int streetEveryWhatVertices = 3;
 
-	[SerializeField] PlaceObjectsFromGrid gridPlacer;
+	[SerializeField] PlaceObjectsFromGrid gridPlacer; // this is how we place items onto the grid
+	[SerializeField] MeshGenerator heightMap; // this is the heightmap for the cities
 
 	void Start () {
 		mesh = new Mesh ();
@@ -33,9 +34,11 @@ public class StreetGrid : MonoBehaviour {
 		int seed = Random.Range (0, streetEveryWhatVertices); // for offsetting so street placement is different every time
 		for (int x = 0; x < xSize; x++) {
 			for (int z = 0; z < zSize; z++) {
-				int y = 0;
+				float y;
 				if (((x + seed) % streetEveryWhatVertices == 0) || ((z + seed) % streetEveryWhatVertices == 0)) {
 					y = -1; // is a street
+				} else {
+					y = heightMap.heightFromIndex (x, z);
 				}
 				vertices [x, z] = new Vector3 (gridScale * x, y, gridScale * z);
 				yield return new WaitForSeconds (.00001f);
@@ -46,6 +49,7 @@ public class StreetGrid : MonoBehaviour {
 
 	}
 
+	// so you can see dots on scene
 	private void OnDrawGizmos () {
 
 
