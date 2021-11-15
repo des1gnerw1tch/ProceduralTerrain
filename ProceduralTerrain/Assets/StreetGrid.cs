@@ -2,80 +2,102 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (MeshFilter))]
 public class StreetGrid : MonoBehaviour {
 	// Start is called before the first frame update
 	Mesh mesh;
 
-	Vector3 [] vertices;
+	/*
+	 * For our vertices, a y value of -1 is STREET
+	 * y value of 0-1 is height of building
+	 */
+	Vector3 [,] vertices;
 	int [] triangles;
 
 	[SerializeField] private int xSize = 40;
 	[SerializeField] private int zSize = 40;
-	[SerializeField] private float amplititude = 3f;
-	[SerializeField] private float scale = .1f;
-
-	private int newNoise;
+	[SerializeField] private int gridScale = 1;
+	[SerializeField] private int streetEveryWhatVertices = 3;
+	[SerializeField] private GameObject streetTile;
+	[SerializeField] private GameObject intersectionTile;
 
 	void Start () {
 		mesh = new Mesh ();
 		GetComponent<MeshFilter> ().mesh = this.mesh;
-		StartCoroutine ("CreateShape");
-		UpdateMesh ();
+		StartCoroutine ("CreateGrid");
 	}
 
-	private void Update () {
-		UpdateMesh ();
-	}
+	// creates the grid of the street, with streets and buildings
+	IEnumerator CreateGrid () {
+		vertices = new Vector3 [xSize, zSize];
 
-	// creates the shape of the mesh
-	IEnumerator CreateShape () {
-		this.newNoise = Random.Range (0, 10000);
-		vertices = new Vector3 [(xSize + 1) * (zSize + 1)];
 
-		for (int z = 0, i = 0; z <= zSize; z++) {
-			for (int x = 0; x <= xSize; x++) {
-				float y = Mathf.PerlinNoise (newNoise + (x * scale), newNoise + (z * scale)) * amplititude;
-				vertices [i] = new Vector3 (x, y, z);
-				i++;
+		int seed = Random.Range (0, streetEveryWhatVertices); // for offsetting so street placement is different every time
+		for (int x = 0; x < xSize; x++) {
+			for (int z = 0; z < zSize; z++) {
+				int y = 0;
+				if (((x + seed) % streetEveryWhatVertices == 0) || ((z + seed) % streetEveryWhatVertices == 0)) {
+					y = -1; // is a street
+				}
+				vertices [x, z] = new Vector3 (gridScale * x, y, gridScale * z);
+				yield return new WaitForSeconds (.00001f);
 			}
 		}
 
-		int vert = 0;
-		int tris = 0;
-		triangles = new int [(xSize * zSize) * 6];
-		for (int z = 0; z < zSize; z++) {
-			for (int x = 0; x < xSize; x++) {
+		StartCoroutine ("PlaceStreets");
+	}
 
-				triangles [tris + 0] = vert + 0;
-				triangles [tris + 1] = vert + xSize + 1;
-				triangles [tris + 2] = vert + 1;
+	// places streets prefabs onto scene
+	IEnumerator PlaceStreets () {
+		// for every tile in the scene
+		for (int x = 0; x < xSize; x++) {
+			for (int z = 0; z < zSize; z++) {
+				// if is street tile
+				if (vertices [x, z].y == -1) {
+					Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
+					toDraw.y = 0.001f; // so street lays on top of grass
 
-				triangles [tris + 3] = vert + 1;
-				triangles [tris + 4] = vert + xSize + 1;
-				triangles [tris + 5] = vert + xSize + 2;
-				vert++;
-				tris += 6;
-
+					GameObject instance;
+					if (HasXNeighbor (x, z) && HasZNeighbor (x, z)) {
+						instance = Instantiate (intersectionTile, toDraw, Quaternion.identity); // spawn Intersection
+					} else {
+						instance = Instantiate (streetTile, toDraw, Quaternion.identity); // spawn normal street
+						if (HasXNeighbor (x, z)) {
+							instance.transform.Rotate (new Vector3 (0, 90, 0)); // if has a X neighbor, we should rotate to match
+						}
+					}
+					yield return new WaitForSeconds (.00001f);
+				}
 			}
-			yield return new WaitForSeconds (.000001f);
-			vert++;
 		}
-
-		/*if (tris == triangles.Length) {
-			yield return new WaitForSeconds (1f);
-			StartCoroutine ("CreateShape");
-		}*/
 
 	}
 
-	// updates the mesh in unity
-	private void UpdateMesh () {
-		mesh.Clear ();
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
+	// checks if a street has neighbor on the X axis
+	private bool HasXNeighbor (int x, int z) {
+		int upperCheckIndex = x + 1;
+		int lowerCheckIndex = x - 1;
 
-		mesh.RecalculateNormals (); // for lighting
+		if ((upperCheckIndex < xSize) && vertices [upperCheckIndex, z].y == -1) { // is a street
+			return true;
+		} else if ((lowerCheckIndex >= 0) && vertices [lowerCheckIndex, z].y == -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// checks if a street has neighbor on the X axis
+	private bool HasZNeighbor (int x, int z) {
+		int upperCheckIndex = z + 1;
+		int lowerCheckIndex = z - 1;
+
+		if ((upperCheckIndex < zSize) && vertices [x, upperCheckIndex].y == -1) { // is a street
+			return true;
+		} else if ((lowerCheckIndex >= 0) && vertices [x, lowerCheckIndex].y == -1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private void OnDrawGizmos () {
@@ -85,13 +107,19 @@ public class StreetGrid : MonoBehaviour {
 			return;
 		}
 
-		for (int i = 0; i < vertices.Length; i++) {
-			if (i % 3 == 0) {
-				Gizmos.color = Color.red;
-			} else {
-				Gizmos.color = Color.gray;
+		for (int x = 0; x < xSize; x++) {
+
+			for (int z = 0; z < zSize; z++) {
+				if (vertices [x, z].y == -1) {
+					Gizmos.color = Color.black;
+				} else {
+					Gizmos.color = Color.white;
+				}
+				Vector3 toDraw = vertices [x, z];
+				toDraw.y = 0;
+				Gizmos.DrawSphere (toDraw, 0.1f);
 			}
-			Gizmos.DrawSphere (vertices [i], 0.1f);
+
 		}
 	}
 
