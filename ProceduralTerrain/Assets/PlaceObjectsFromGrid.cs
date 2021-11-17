@@ -37,9 +37,10 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 							instance.transform.Rotate (new Vector3 (0, 90, 0)); // if has a X neighbor, we should rotate to match
 						}
 					}
-					yield return new WaitForSeconds (.00001f);
+					//yield return new WaitForSeconds (.00001f);
 				}
 			}
+			yield return new WaitForSeconds (.00001f);
 		}
 		StartCoroutine ("IPlaceBuildings");
 	}
@@ -57,9 +58,7 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 
 					instance = Instantiate (buildingTile, toDraw, Quaternion.identity); // spawn building
 
-					Vector3 newScale = instance.transform.localScale;
-					newScale.y += vertices [x, z].y; // adding on the added height of the building
-					instance.transform.localScale = newScale;
+					instance.GetComponent<GrowMesh> ().GrowScaleY (vertices [x, z].y);
 					yield return new WaitForSeconds (.00001f);
 				}
 			}

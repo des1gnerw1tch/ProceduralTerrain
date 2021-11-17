@@ -485,12 +485,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 20
-  zSize: 20
+  xSize: 30
+  zSize: 30
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
   heightMap: {fileID: 1990891535}
+  scale: 0.1
+  amplitude: 8.25
 --- !u!33 &1920932966
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -517,7 +519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1990891534
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSize: 40
   zSize: 40
-  amplititude: 12.18
+  amplititude: 5
   scale: 0.1
   looping: 0
   drawGizmos: 0
