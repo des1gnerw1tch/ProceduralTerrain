@@ -490,9 +490,14 @@ MonoBehaviour:
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
-  heightMap: {fileID: 1990891535}
+  percentCityDowntown: 0.376
+  downtownBuildingSizeMultiplier: 2
+  percentCitySuburb: 0.392
+  suburbBuildingSizeMultiplier: 0.5
   scale: 0.1
   amplitude: 8.25
+  perlinSeed: 8098
+  randomizeSeed: 0
 --- !u!33 &1920932966
 MeshFilter:
   m_ObjectHideFlags: 0

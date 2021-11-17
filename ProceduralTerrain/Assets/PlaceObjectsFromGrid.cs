@@ -59,9 +59,10 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 					instance = Instantiate (buildingTile, toDraw, Quaternion.identity); // spawn building
 
 					instance.GetComponent<GrowMesh> ().GrowScaleY (vertices [x, z].y);
-					yield return new WaitForSeconds (.00001f);
+					//yield return new WaitForSeconds (.00001f);
 				}
 			}
+			yield return new WaitForSeconds (.00001f);
 		}
 	}
 

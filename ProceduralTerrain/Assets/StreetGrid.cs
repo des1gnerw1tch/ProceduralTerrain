@@ -19,12 +19,21 @@ public class StreetGrid : MonoBehaviour {
 
 	[SerializeField] PlaceObjectsFromGrid gridPlacer; // this is how we place items onto the grid
 
-	[Header ("Downtown Area")]
-	[SerializeField] private float percentDowntown;
+	[Header ("Areas")]
+
+	[Range (0.0f, 1f)]
+	[SerializeField] private float percentCityDowntown; // what percentage of city to be downtown? 
+	[SerializeField] private float downtownBuildingSizeMultiplier; // how much larger should downtown buildings be then normal buldings?
+
+	[Range (0.0f, 1f)]
+	[SerializeField] private float percentCitySuburb; // what percentage city to be a suburb? (smaller buildings)
+	[SerializeField] private float suburbBuildingSizeMultiplier; // how much smaller should suburb buildings be than normal buildings?
 
 	[Header ("Perlin Noise Generator")]
 	[SerializeField] private float scale; // scale of this perlin noise, how close you want data to be
 	[SerializeField] private float amplitude; // how much we would like to amplify this noise value by
+	[SerializeField] private int perlinSeed;
+	[SerializeField] private bool randomizeSeed; // should I randomize this seed? 
 
 
 
@@ -38,7 +47,10 @@ public class StreetGrid : MonoBehaviour {
 	// creates the grid of the street, with streets and buildings
 	IEnumerator CreateGrid () {
 		vertices = new Vector3 [xSize, zSize];
-		int perlinSeed = Random.Range (1, 10000); // seed for perlin noise generated
+		if (randomizeSeed) {
+			perlinSeed = Random.Range (1, 10000); // seed for perlin noise generated
+		}
+
 
 		int seed = Random.Range (0, streetEveryWhatVertices); // for offsetting so street placement is different every time
 		for (int x = 0; x < xSize; x++) {
@@ -53,11 +65,11 @@ public class StreetGrid : MonoBehaviour {
 					y = Mathf.PerlinNoise (perlinSeed + (x * scale), perlinSeed + (z * scale)) * amplitude;
 				}
 
-				if (perlin > 0.65) { // if building is in the upper 35% of sizes, make it DOWNTOWN, even bigger
-					y *= 1.5f;
-				} /*else if (perlin < 0.20 && perlin > 0) { // if building is in the lower 20%, make them extra small
-					y /= 1.5f;
-				}*/
+				if (perlin > 1 - percentCityDowntown) { // if building is in the upper % of sizes, make it DOWNTOWN, even bigger
+					y *= downtownBuildingSizeMultiplier;
+				} else if (perlin < percentCitySuburb && perlin > 0) { // if building is in the lower 20%, make them extra small
+					y *= suburbBuildingSizeMultiplier;
+				}
 
 				vertices [x, z] = new Vector3 (gridScale * x, y, gridScale * z);
 			}
