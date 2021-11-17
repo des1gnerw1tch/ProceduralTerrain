@@ -389,8 +389,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365218582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.8874, y: -0, z: 19.2536}
-  m_LocalScale: {x: 9.443498, y: 2.5079, z: 9.52676}
+  m_LocalPosition: {x: 53.8776, y: -0, z: 51.0324}
+  m_LocalScale: {x: 16.4418, y: 2.5079, z: 25.603222}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -485,18 +485,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 30
-  zSize: 30
+  xSize: 50
+  zSize: 50
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
-  percentCityDowntown: 0.376
+  percentCityDowntown: 0.217
   downtownBuildingSizeMultiplier: 2
-  percentCitySuburb: 0.392
+  percentCitySuburb: 0.469
   suburbBuildingSizeMultiplier: 0.5
+  suburbanFullness: 0.513
   scale: 0.1
   amplitude: 8.25
-  perlinSeed: 8098
+  perlinSeed: 1887
   randomizeSeed: 0
 --- !u!33 &1920932966
 MeshFilter:

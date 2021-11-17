@@ -8,7 +8,8 @@ public class StreetGrid : MonoBehaviour {
 
 	/*
 	 * For our vertices, a y value of -1 is STREET
-	 * y value of 0-1 is height of building
+	 * y value of > 1 is height of building
+	 * y value of -2 is an EMPTY SPACE, no street and no building
 	 */
 	Vector3 [,] vertices;
 
@@ -28,14 +29,14 @@ public class StreetGrid : MonoBehaviour {
 	[Range (0.0f, 1f)]
 	[SerializeField] private float percentCitySuburb; // what percentage city to be a suburb? (smaller buildings)
 	[SerializeField] private float suburbBuildingSizeMultiplier; // how much smaller should suburb buildings be than normal buildings?
+	[Range (0.0f, 1f)]
+	[SerializeField] private float suburbanFullness; // how full is this suburb with buildings?
 
 	[Header ("Perlin Noise Generator")]
 	[SerializeField] private float scale; // scale of this perlin noise, how close you want data to be
 	[SerializeField] private float amplitude; // how much we would like to amplify this noise value by
 	[SerializeField] private int perlinSeed;
 	[SerializeField] private bool randomizeSeed; // should I randomize this seed? 
-
-
 
 
 	void Start () {
@@ -68,7 +69,12 @@ public class StreetGrid : MonoBehaviour {
 				if (perlin > 1 - percentCityDowntown) { // if building is in the upper % of sizes, make it DOWNTOWN, even bigger
 					y *= downtownBuildingSizeMultiplier;
 				} else if (perlin < percentCitySuburb && perlin > 0) { // if building is in the lower 20%, make them extra small
-					y *= suburbBuildingSizeMultiplier;
+					if (Random.Range (0f, 1f) > suburbanFullness) {
+						y = -2;
+					} else {
+						y *= suburbBuildingSizeMultiplier;
+					}
+
 				}
 
 				vertices [x, z] = new Vector3 (gridScale * x, y, gridScale * z);

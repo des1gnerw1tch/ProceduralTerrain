@@ -49,8 +49,8 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 		for (int x = 0; x < xSize; x++) {
 			for (int z = 0; z < zSize; z++) {
 
-				// if is not street tile
-				if (vertices [x, z].y != -1) {
+				// if is not street tile or empty tile!
+				if (vertices [x, z].y != -1 && vertices [x, z].y != -2) {
 
 					GameObject instance;
 					Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
