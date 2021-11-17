@@ -51,7 +51,7 @@ public class StreetGrid : MonoBehaviour {
 			perlinSeed = Random.Range (1, 10000); // seed for perlin noise generated
 		}
 
-
+		Random.InitState (perlinSeed); // our random number generator will have the same seed as our perlin value
 		int seed = Random.Range (0, streetEveryWhatVertices); // for offsetting so street placement is different every time
 		for (int x = 0; x < xSize; x++) {
 			for (int z = 0; z < zSize; z++) {
