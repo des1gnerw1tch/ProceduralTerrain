@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -235,7 +235,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -389,8 +389,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365218582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.8776, y: -0, z: 51.0324}
-  m_LocalScale: {x: 16.4418, y: 2.5079, z: 25.603222}
+  m_LocalPosition: {x: 84.707, y: -0, z: 71.3508}
+  m_LocalScale: {x: 22.607473, y: 2.5079, z: 29.666452}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -485,19 +485,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 50
-  zSize: 50
+  xSize: 140
+  zSize: 140
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
-  percentCityDowntown: 0.217
-  downtownBuildingSizeMultiplier: 2
-  percentCitySuburb: 0.469
+  percentCityDowntown: 0.314
+  downtownBuildingSizeMultiplier: 4
+  percentCitySuburb: 0.456
   suburbBuildingSizeMultiplier: 0.5
-  suburbanFullness: 0.513
+  suburbanFullness: 0.576
   scale: 0.1
-  amplitude: 8.25
-  perlinSeed: 1887
+  amplitude: 10.16
+  perlinSeed: 4689
   randomizeSeed: 0
 --- !u!33 &1920932966
 MeshFilter:
