@@ -6,6 +6,7 @@ using UnityEngine;
 public class GrowMesh : MonoBehaviour {
 	[SerializeField] private Window [] windows;
 	[SerializeField] private float windowSeperation;
+	[SerializeField] private bool growWindows;
 	private float gainedHeight = 0;
 
 	// Grows the Y scale of this object bottom up
@@ -18,14 +19,17 @@ public class GrowMesh : MonoBehaviour {
 		this.transform.localScale = scale;
 		this.transform.position = pos;
 		gainedHeight = x;
-		PlaceNewWindows ();
+		if (growWindows) {
+			PlaceNewWindows ();
+		}
+
 	}
 
 	// Places windows on a building
 	void PlaceNewWindows () {
-		for (float i = windowSeperation; i < gainedHeight; i += windowSeperation) {
+		for (float i = windowSeperation; i < gainedHeight * 1.5; i += windowSeperation) {
 			foreach (Window window in windows) {
-				GameObject newWindow = Instantiate (window.gameObject);
+				GameObject newWindow = Instantiate (window.gameObject, this.transform.parent);
 				Vector3 pos = window.transform.position;
 				pos.y += i;
 				newWindow.transform.position = pos;
