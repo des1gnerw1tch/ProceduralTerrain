@@ -485,8 +485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 140
-  zSize: 140
+  xSize: 120
+  zSize: 120
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
@@ -498,7 +498,7 @@ MonoBehaviour:
   scale: 0.1
   amplitude: 10.16
   perlinSeed: 4689
-  randomizeSeed: 0
+  randomizeSeed: 1
 --- !u!33 &1920932966
 MeshFilter:
   m_ObjectHideFlags: 0

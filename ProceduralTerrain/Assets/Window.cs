@@ -8,15 +8,16 @@ using UnityEngine;
 public class Window : MonoBehaviour {
 	[SerializeField] private Material onMaterial;
 	[SerializeField] private Material offMaterial;
+	[Range (0, 1)]
 	[SerializeField] private float percentWindowsOn;
 
-	// Start is called before the first frame update
-	void Start () {
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-
+	// Either turns a window on or off
+	public void RandomizeState () {
+		MeshRenderer meshRenderer = GetComponent<MeshRenderer> ();
+		if (Random.Range (0f, 1f) < percentWindowsOn) {
+			meshRenderer.material = onMaterial;
+		} else {
+			meshRenderer.material = offMaterial;
+		}
 	}
 }

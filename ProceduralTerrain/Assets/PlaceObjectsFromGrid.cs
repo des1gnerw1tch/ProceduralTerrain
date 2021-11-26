@@ -62,8 +62,9 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 					//yield return new WaitForSeconds (.00001f);
 				}
 			}
-			yield return new WaitForSeconds (.00001f);
+			//yield return new WaitForSeconds (.00001f);
 		}
+		yield return new WaitForSeconds (.00001f);
 	}
 
 	// checks if a street has neighbor on the X axis

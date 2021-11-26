@@ -26,6 +26,7 @@ public class GrowMesh : MonoBehaviour {
 	}
 
 	// Places windows on a building
+	//TODO: Have this be affected by seed as well!
 	void PlaceNewWindows () {
 		for (float i = windowSeperation; i < gainedHeight * 1.5; i += windowSeperation) {
 			foreach (Window window in windows) {
@@ -33,6 +34,7 @@ public class GrowMesh : MonoBehaviour {
 				Vector3 pos = window.transform.position;
 				pos.y += i;
 				newWindow.transform.position = pos;
+				newWindow.GetComponent<Window> ().RandomizeState ();
 			}
 		}
 	}
