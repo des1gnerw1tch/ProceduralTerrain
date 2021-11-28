@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &3025168059681372860
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &3927576749830424885
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &4997209547929970621
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &5530299974285009267
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &7713928942229226852
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1 &8528536600776503378
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.287
+  percentWindowsOn: 0.211
 --- !u!1001 &3830218223227589998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
     - target: {fileID: 1383001626709349092, guid: 1d1a999daa26a4fac897332563343f93, type: 3}
       propertyPath: percentWindowsOn
-      value: 0.287
+      value: 0.211
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a999daa26a4fac897332563343f93, type: 3}

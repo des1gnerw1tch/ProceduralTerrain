@@ -110,5 +110,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMaterial: {fileID: 2100000, guid: cacc5f63d3aad4c47b74eb3bcdd0b16e, type: 2}
   offMaterial: {fileID: 2100000, guid: b360a7e97b93643ae8d558b03726f1d2, type: 2}
-  percentWindowsOn: 0.5
-  _renderer: {fileID: 6981259903930925561}
+  percentWindowsOn: 0.292

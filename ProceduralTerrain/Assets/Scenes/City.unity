@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.7578583, g: 0.5409028, b: 0.64492255, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 0.9858491, b: 0.9925386, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ceb0a3ed2cb53a94fa21843cc958c52b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.517
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.3260309, g: 0.36388794, b: 0.4234489, a: 0.517}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -389,8 +389,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365218582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 145.6073, y: -0, z: 150.6}
-  m_LocalScale: {x: 29.20906, y: 2.5079, z: 29.666452}
+  m_LocalPosition: {x: 163.6364, y: -0, z: 163.3546}
+  m_LocalScale: {x: 32.813457, y: 2.5079, z: 32.217766}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -485,16 +485,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 150
-  zSize: 150
+  xSize: 170
+  zSize: 170
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
   percentCityDowntown: 0.314
-  downtownBuildingSizeMultiplier: 4
-  percentCitySuburb: 0.456
+  downtownBuildingSizeMultiplier: 6
+  percentCitySuburb: 0.518
   suburbBuildingSizeMultiplier: 0.5
-  suburbanFullness: 0.576
+  suburbanFullness: 0.42
   scale: 0.1
   amplitude: 10.16
   perlinSeed: 4689
