@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 0.9858491, b: 0.9925386, a: 1}
+  m_AmbientSkyColor: {r: 0.1882353, g: 0.18431373, b: 0.1882353, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ceb0a3ed2cb53a94fa21843cc958c52b, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.517
+  m_ReflectionIntensity: 0.113
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3260309, g: 0.36388794, b: 0.4234489, a: 0.517}
+  m_IndirectSpecularColor: {r: 0.14720342, g: 0.16729319, b: 0.19890064, a: 0.113}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -235,7 +235,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.25
+  m_Intensity: 0.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -244,7 +244,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.501
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -292,13 +292,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892847593}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.17885838, y: -0.82114124, z: 0.38290447, w: 0.38356355}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -129.924, z: 0}
 --- !u!1 &1365218582
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +441,7 @@ MonoBehaviour:
   streetTile: {fileID: 9183477567093710568, guid: 77663e9b62ac44dd2be4ffd2b9ffc488, type: 3}
   intersectionTile: {fileID: 9183477567093710568, guid: 4cc20c2576d344535a314e3401e37983, type: 3}
   buildingTile: {fileID: 253568099432370360, guid: e37fe2b1db7a748fd81051b2b3928ecf, type: 3}
+  treeSelector: {fileID: 8727349497613122, guid: e358b2e5b68c643b5a4977e80d8f5edb, type: 3}
 --- !u!1 &1920932963
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,16 +486,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3d8ddd9fb354ebc81c78693bb79c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 170
-  zSize: 170
+  xSize: 100
+  zSize: 100
   gridScale: 2
   streetEveryWhatVertices: 3
   gridPlacer: {fileID: 1900191745}
-  percentCityDowntown: 0.314
-  downtownBuildingSizeMultiplier: 6
-  percentCitySuburb: 0.518
+  percentCityDowntown: 0.273
+  downtownBuildingSizeMultiplier: 2
+  percentCitySuburb: 0.72
   suburbBuildingSizeMultiplier: 0.5
-  suburbanFullness: 0.42
+  suburbanFullness: 0.333
   scale: 0.1
   amplitude: 10.16
   perlinSeed: 4689

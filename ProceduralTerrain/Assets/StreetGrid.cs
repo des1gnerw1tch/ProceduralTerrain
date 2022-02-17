@@ -9,7 +9,7 @@ public class StreetGrid : MonoBehaviour {
 	/*
 	 * For our vertices, a y value of -1 is STREET
 	 * y value of > 1 is height of building
-	 * y value of -2 is an EMPTY SPACE, no street and no building
+	 * y value of -2 is an EMPTY SPACE, no street and no building, maybe TODO: Tree?
 	 */
 	Vector3 [,] vertices;
 

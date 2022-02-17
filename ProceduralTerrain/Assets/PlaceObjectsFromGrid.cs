@@ -11,6 +11,7 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 	[SerializeField] private GameObject intersectionTile;
 
 	[SerializeField] private GameObject buildingTile;
+	[SerializeField] private GameObject treeSelector;
 
 	public void PlaceStreets (Vector3 [,] vertices, int xSize, int zSize) {
 		this.vertices = vertices;
@@ -47,19 +48,26 @@ public class PlaceObjectsFromGrid : MonoBehaviour {
 
 	IEnumerator IPlaceBuildings () {
 		for (int x = 0; x < xSize; x++) {
-			for (int z = 0; z < zSize; z++) {
-
+			for (int z = 0; z < zSize; z++) 
+			{
+				Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
 				// if is not street tile or empty tile!
 				if (vertices [x, z].y != -1 && vertices [x, z].y != -2) {
-
 					GameObject instance;
-					Vector3 toDraw = vertices [x, z]; // where we will draw this tile in worldspace
+					
 					toDraw.y = 0.001f; // so street lays on top of grass
 
 					instance = Instantiate (buildingTile, toDraw, Quaternion.identity); // spawn building
 
 					instance.GetComponentInChildren<GrowMesh> ().GrowScaleY (vertices [x, z].y);
 					//yield return new WaitForSeconds (.00001f);
+				} else if (vertices [x,z].y == -2) // if is empty tile, TODO: Spawn a tree!
+				{
+					if (Random.Range(0f, 1f) > .8) // spawn a tree sometimes
+					{
+						Instantiate(treeSelector, toDraw, Quaternion.identity);
+					}
+					
 				}
 			}
 			//yield return new WaitForSeconds (.00001f);
